@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>form</title>
+</head>
+
+<body>
+
+    <body>
+        <section class="min-h-screen flex items-stretch text-white ">
+            <div class=" lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center">
+                <div class="text-area absolute  opacity-60 inset-0 z-0"></div>
+                <div class="w-full px-24 z-10">
+                    <!-- <h1 class="text-5xl font-bold text-left tracking-wide birthday-text">Keep it special</h1> -->
+                    <p class="text-3xl my-4 opacityAni birthday-text-2">This is an email sender app which sends you an birthday
+                        wish greeting email from my gamil-account. </p>
+                </div>
+                <div class="bottom-0 absolute p-4 text-center right-0 left-0 flex justify-center space-x-4">
+                    <a href="https://www.linkedin.com/in/chaitanya-ghodmare-35b463241/">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                    <a href="#">
+                        <i class="bi bi-github"></i>
+                    </a>
+                    <a href="#">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="actual-form lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0">
+                <div class="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center">
+                    <div class="absolute mobile-scr opacity-60 inset-0 z-0"></div>
+                </div>
+                <div class="w-full py-6 z-20">
+
+                    <div class="birthday-text opacityAni py-6 space-x-2">
+
+                        <h1>Birthday form</h1>
+                    </div>
+
+                    <form action="/" method="post" class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+                        <div class="pb-2 pt-4 formInputs opacityAni">
+                            <input type="text" name="name" id="name" placeholder="Name"
+                                style="background-color: white; color: black;"
+                                class="block w-full p-3 text-lg rounded-sm ">
+                        </div>
+                        <div class="pb-2 pt-4 formInputs opacityAni">
+                            <input type="email" name="email" id="email" placeholder="Email"
+                                style="background-color: white; color: black;"
+                                class="block w-full p-3 text-lg rounded-sm ">
+                        </div>
+                        <div class="pb-2 pt-4 formInputs opacityAni">
+                            <input type="date" name="date" id="date" placeholder="Date"
+                                style="background-color: white; color:rgba(0, 0, 0, 0.406)"
+                                class="block w-full p-3 text-lg rounded-sm "><i
+                                class="fas fa-calendar datepicker-toggle-icon"></i>
+
+                        </div>
+
+
+
+                        <div class="px-4 pb-2 pt-4 opacityAni">
+                            <button
+                                class="sign-in-btn uppercase block w-full p-4 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none"
+                                type="submit" name="submit" style="background-color:#A96823">sign
+                                in</button>
+                        </div>
+
+                        <div class="p-4 text-center right-0 left-0 flex justify-center space-x-4 mt-16 lg:hidden ">
+                            <a href="https://www.linkedin.com/in/chaitanya-ghodmare-35b463241/">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                            <a href="#">
+                                <i class="bi bi-github"></i>
+                            </a>
+                            <a href="#">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </body>
+    <script>
+        
+        let formInputs = document.querySelectorAll(".opacityAni");
+        
+        formInputs.forEach(element => {
+            element.classList.add("birthday-text-2-animation")
+        }); 
+    </script>
+
+
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "birthday_wish_email_sender",
+  "version": "1.0.0",
+  "description": "This is the dynamic website that sends the birthday wish request to those whose name is registered in the database.",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chaitanya Ghodmare",
+  "license": "ISC",
+  "dependencies": {
+    "and": "^0.0.3",
+    "body-parser": "^1.20.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.2",
+    "nodemailer": "^6.8.0"
+  }
+}
