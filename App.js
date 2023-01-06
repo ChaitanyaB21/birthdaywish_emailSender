@@ -1,8 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-// const ejs = require("ejs");
+const ejs = require("ejs");
 const mongoose = require("mongoose");
 const nodemailer = require('nodemailer');
+require("dotenv").config();
 const today = new Date().toLocaleDateString('en-us', { month: "short", day: "numeric" })
 
 
@@ -10,12 +11,12 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'ghodmare.1@iitj.ac.in',
-        pass: 'Chait@123'
+        pass: process.env.TEXT
     }
 });
 
 const app = express();
-// app.set("view engine", "ejs");
+app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("Public"));
 
@@ -35,7 +36,7 @@ const Users = mongoose.model("userInfo", userInfoSchema);
 
 const user1 = new Users({               /* This is the test user */
     name: "Sam",
-    emailId: "seemarghodmare@gmail.com",
+    emailId: "abc@gmail.com",
     date: "Jan 6"
 })
 
@@ -45,7 +46,7 @@ const user1 = new Users({               /* This is the test user */
 
 // Get request to the root route
 app.get("/", function (req, res) {
-    res.sendFile( __dirname + "/index.html");
+    res.sendFile(__dirname + "/index.html");
 })
 
 app.post("/", function (req, res) {
@@ -60,18 +61,18 @@ app.post("/", function (req, res) {
         emailId: email,
         date: date
     })
-    
+
     Users.find(function (err, result) {
         let flag = false;
         result.forEach(element => {                           /* New entry will be added in the database only when the entered emailId is not already in the database  */
             if (element.emailId === email) {
-                
+
                 flag = true;
             }
 
         });
         if (flag === false) {
-            
+
             newUser.save();
 
             // Sign up confirm Email sender app code..................................................................................
@@ -79,8 +80,8 @@ app.post("/", function (req, res) {
             var mailOptions = {
                 from: 'ghodmare.1@iitj.ac.in',
                 to: email,
-                subject: 'Successfully signed in my birthdays database.',
-                html: "<h1>Hi</h1> <p>This is the auto generated text html file sent after loggin in</p>"
+                subject: 'Successfully signed in birthdays database.',
+                text: "Thanks for signed in my birthday database. You will be receiving a greetings email on your birthday. "
             };
 
             transporter.sendMail(mailOptions, function (error, info) {
@@ -92,8 +93,9 @@ app.post("/", function (req, res) {
             });
 
             // Sign up confirm Email sender app code ends..............................................................................
+            res.render("success", { gmailID: email });
         } else {
-            res.render("Entered emailId is already sign in");
+            res.render("nosuccess", { gmailID: email });
         }
     })
 
@@ -101,27 +103,31 @@ app.post("/", function (req, res) {
 })
 
 
+// console.log(today)
+Users.find({ date: today }, function (err, result) {
 
-Users.findOne({ date: today }, function (err, result) {
-    
-    if (result !== null) {
-        // console.log("Found a birthday");
+    if (result != null) {
+        
         // Sign up Birthday Email sender app code..................................................................................
 
-        var mailOptions = {
-            from: 'ghodmare.1@iitj.ac.in',
-            to: result.emailId,
-            subject: 'Hi this is chaitanya Ghodmare',
-            html: "<h1>Hi</h1> <p>This is the auto generated text html file sent after loggin in</p>"
-        };
+        result.forEach(element => {
+            var mailOptions = {
+                from: 'ghodmare.1@iitj.ac.in',
+                to: element.emailId,
+                subject: 'Happy Birthday from Chaitanya Ghodmare',
+                text: "Wish you a very happy birthday. I hope all your birthday wishes and dreams come true.",
+                html: "<p>Wish you a very happy birthday. I hope all your birthday wishes and dreams come true.</p><h1>Forget the past, look for the future, for the best things are yet to come. </h1>"
+            };
 
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Birthday Email sent ');
-            }
+            transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Birthday Email sent ');
+                }
+            });
         });
+
 
         // Sign up birthday Email sender app code ends..............................................................................
     }
