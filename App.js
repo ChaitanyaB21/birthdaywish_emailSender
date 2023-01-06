@@ -24,7 +24,7 @@ app.use(express.static("Public"));
 // Creating the database...................................................................
 
 mongoose.set('strictQuery', true);
-mongoose.connect('mongodb://127.0.0.1:27017/birthdays');
+mongoose.connect('mongodb+srv://Chaitanya_Ghodmare:Chaitanya_Ghodmare@cluster0.o75ionv.mongodb.net/birthdays');
 
 const userInfoSchema = new mongoose.Schema({
     name: String,
@@ -34,13 +34,6 @@ const userInfoSchema = new mongoose.Schema({
 
 const Users = mongoose.model("userInfo", userInfoSchema);
 
-const user1 = new Users({               /* This is the test user */
-    name: "Sam",
-    emailId: "abc@gmail.com",
-    date: "Jan 6"
-})
-
-// user1.save()
 
 // Mongo db code over......................................................................
 
@@ -109,14 +102,17 @@ Users.find({ date: today }, function (err, result) {
     if (result != null) {
         
         // Sign up Birthday Email sender app code..................................................................................
-
+        let num = (Math.random() * 4) + 1
         result.forEach(element => {
             var mailOptions = {
                 from: 'ghodmare.1@iitj.ac.in',
                 to: element.emailId,
                 subject: 'Happy Birthday from Chaitanya Ghodmare',
                 text: "Wish you a very happy birthday. I hope all your birthday wishes and dreams come true.",
-                html: "<p>Wish you a very happy birthday. I hope all your birthday wishes and dreams come true.</p><h1>Forget the past, look for the future, for the best things are yet to come. </h1>"
+                html: "<p>Wish you a very happy birthday. I hope all your birthday wishes and dreams come true.</p><h1>Forget the past, look for the future, for the best things are yet to come. </h1>",
+                attachments: [{
+                    path: __dirname + "BirthdayCards/BirthdayCard" + num + ".png"
+                }]
             };
 
             transporter.sendMail(mailOptions, function (error, info) {
@@ -137,16 +133,6 @@ Users.find({ date: today }, function (err, result) {
 
 
 
-app.listen(3000, function () {
-    console.log("Server is running by lightening speed on port 3000");
+app.listen(process.env.PORT || 3000, function () {
+    console.log("Server is running with lightening speed");
 })
-
-
-
-
-
-
-
-
-
-
