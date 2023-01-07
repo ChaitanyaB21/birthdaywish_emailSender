@@ -16,7 +16,7 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            height: 400px;
+            height: 80%;
             width: 75%;
             background: #f2f2f2;
             overflow: hidden;
@@ -29,14 +29,14 @@
             position: absolute;
             top: 50%;
             transform: translatey(-50%);
-            text-align: justify;
             color: black;
-            padding: 40px;
+            padding: 20px;
+            padding-right: 20px;
             font-family: 'Merriweather', serif;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.15rem;
             font-weight: 900;
             
         }
@@ -54,9 +54,9 @@
     <body>
         <div class="container">
             <div class="content">
-                <h1>You are already signed in !!!</h1>
+                <h1>Already signed in !!</h1>
                 <h3>
-                    Your gmailID , <%= gmailID %> , has been already logged in. This app stores your entered data in
+                    Your gmailID , <%= gmailID %> , is already signed in. This app stores your entered data in
                         MongoDB Atlas cloud. Your birthday greeting email will be automatically sent through node-js
                         itself by compairing current date with the birth dates in the database.</h3>
             </div>
