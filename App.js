@@ -102,7 +102,7 @@ Users.find({ date: today }, function (err, result) {
     if (result != null) {
         
         // Sign up Birthday Email sender app code..................................................................................
-        let num = (Math.random() * 4) + 1
+        let num = Math.floor((Math.random() * 4) + 1)
         result.forEach(element => {
             var mailOptions = {
                 from: 'ghodmare.1@iitj.ac.in',
@@ -111,7 +111,7 @@ Users.find({ date: today }, function (err, result) {
                 text: "Wish you a very happy birthday. I hope all your birthday wishes and dreams come true.",
                 html: "<p>Wish you a very happy birthday. I hope all your birthday wishes and dreams come true.</p><h1>Forget the past, look for the future, for the best things are yet to come. </h1>",
                 attachments: [{
-                    path: __dirname + "BirthdayCards/BirthdayCard" + num + ".png"
+                    path: __dirname + "/BirthdayCard"+ num + ".png"
                 }]
             };
 
