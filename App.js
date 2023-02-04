@@ -74,16 +74,20 @@ app.post("/", function (req, res) {
                 from: 'ghodmare.1@iitj.ac.in',
                 to: result.emailId,
                 subject: 'Successfully signed in birthdays database.',
-                text: "Thanks for signed in my birthday database. You will be receiving a greetings email on your birthday. "
+                text: "Thanks for signing in my birthday database. You will be receiving a greetings email on your registered birthday. "
             };
 
-            transporter.sendMail(mailOptions, function (error, info) {
-                if (error) {
-                    console.log(error);
-                } else {
-                    console.log('Email sent ');
-                }
-            });
+            new Promise((resolve, reject) => {
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve('Email sent ');
+                    }
+                });
+            })
+
+
 
             // Sign up confirm Email sender app code ends..............................................................................
             res.render("success", { gmailID: email });
@@ -100,7 +104,7 @@ app.post("/", function (req, res) {
 Users.find({ date: today }, function (err, result) {
 
     if (result != null) {
-        
+
         // Sign up Birthday Email sender app code..................................................................................
         let num = Math.floor((Math.random() * 4) + 1)
         result.forEach(element => {
@@ -111,7 +115,7 @@ Users.find({ date: today }, function (err, result) {
                 text: "Wish you a very happy birthday. I hope all your birthday wishes and dreams come true.",
                 html: "<p>Wish you a very happy birthday. I hope all your birthday wishes and dreams come true.</p><h1>Forget the past, look for the future, for the best things are yet to come. </h1>",
                 attachments: [{
-                    path: __dirname + "/BirthdayCard"+ num + ".png"
+                    path: __dirname + "/BirthdayCard" + num + ".png"
                 }]
             };
 
