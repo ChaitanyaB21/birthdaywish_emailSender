@@ -24,7 +24,7 @@ app.use(express.static("Public"));
 // Creating the database...................................................................
 
 mongoose.set('strictQuery', true);
-mongoose.connect('mongodb+srv://Chaitanya_Ghodmare:Chaitanya_Ghodmare@cluster0.o75ionv.mongodb.net/birthdays');
+mongoose.connect(process.env.MONGO_DB);
 
 const userInfoSchema = new mongoose.Schema({
     name: String,
