@@ -72,7 +72,7 @@ app.post("/", function (req, res) {
 
             var mailOptions = {
                 from: 'ghodmare.1@iitj.ac.in',
-                to: email,
+                to: result.emailId,
                 subject: 'Successfully signed in birthdays database.',
                 text: "Thanks for signed in my birthday database. You will be receiving a greetings email on your birthday. "
             };
